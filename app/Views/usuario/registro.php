@@ -8,7 +8,7 @@
 
 </head>
 
-<body>
+<body class="centrado page-loaded">
     <div class="contenedor">
         <h2>Registro</h2>
 

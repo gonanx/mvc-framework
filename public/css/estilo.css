@@ -1,6 +1,8 @@
-/* ============================
-   ESTILO GENERAL
-============================ */
+
+
+* {
+    box-sizing: border-box;
+}
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -8,25 +10,23 @@ body {
     margin: 0;
     padding: 0;
     color: #4a3f35;
-
     opacity: 0;
     transform: translateX(40px);
     transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
-/* SOLO login y registro deben estar centrados */
 body.centrado {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    padding: 20px;
 }
 
-/* Páginas con header */
 body.con-header {
     display: block;
     min-height: auto;
-    padding-top: 20px;
 }
 
 body.page-loaded {
@@ -39,23 +39,19 @@ body.page-exit {
     transform: translateX(-40px);
 }
 
-/* ============================
-   CONTENEDORES
-============================ */
-
 .contenedor {
-    width: 90%;
+    width: 95%;
     max-width: 480px;
     background: #fffaf2;
     padding: 30px;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     border: 1px solid #e6d9c6;
-    margin: 0 auto;
+    margin: 40px auto;
 }
 
 .contenedor-disponibilidad {
-    max-width: 600px;
+    max-width: 800px;
 }
 
 .contenedor-espaciado {
@@ -69,10 +65,6 @@ h2 {
     margin-bottom: 25px;
     font-weight: 500;
 }
-
-/* ============================
-   FORMULARIOS
-============================ */
 
 form {
     display: flex;
@@ -96,14 +88,11 @@ select {
     border-radius: 12px;
     border: 1px solid #c9b8a6;
     background: #fffdf8;
-    font-size: 17px;
+    font-size: 16px;
     color: #4a3f35;
     appearance: none;
     outline: none;
     width: 100%;
-    cursor: pointer;
-    box-sizing: border-box;
-    background-image: none;
     transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -113,20 +102,12 @@ select:focus {
     box-shadow: 0 0 8px rgba(122, 14, 26, 0.25);
 }
 
-select:hover {
-    border-color: #7a0e1a;
-}
-
 .select-disponibilidad {
     background-image: url("data:image/svg+xml;utf8,<svg fill='%237a0e1a' height='22' viewBox='0 0 20 20' width='22' xmlns='http://www.w3.org/2000/svg'><polygon points='0,0 20,0 10,12'/></svg>");
     background-repeat: no-repeat;
     background-position: right 14px center;
     background-size: 16px;
 }
-
-/* ============================
-   BOTONES
-============================ */
 
 button {
     padding: 14px 18px;
@@ -148,12 +129,7 @@ button:hover {
 
 button:active {
     transform: scale(0.96);
-    box-shadow: 0 3px 8px rgba(90, 15, 27, 0.25);
 }
-
-/* ============================
-   TARJETAS
-============================ */
 
 .tarjeta {
     background: #fffdf8;
@@ -161,20 +137,8 @@ button:active {
     padding: 20px;
     border-radius: 14px;
     box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-    max-width: 420px;
-    margin: 0 auto;
-    text-align: center;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    transition: transform 0.25s ease;
 }
-
-.tarjeta:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
-}
-
-/* ============================
-   GRID DISPONIBILIDAD
-============================ */
 
 .grid-disponibilidad {
     display: grid;
@@ -195,10 +159,6 @@ button:active {
     }
 }
 
-/* ============================
-   ENLACES
-============================ */
-
 a {
     color: #7a0e1a;
     text-decoration: none;
@@ -209,32 +169,18 @@ a:hover {
     text-decoration: underline;
 }
 
-/* ============================
-   HEADER
-============================ */
-
 .header {
     width: 100%;
-    max-width: 100%;
     background: #fffaf2;
     border-bottom: 1px solid #e6d9c6;
-    padding: 25px 25px; /* más alto */
+    padding: 15px 25px;
     min-height: 70px;
-
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
-
-    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-
-    overflow: visible;
-    box-sizing: border-box;
-}
-
-.header-centro {
-    text-align: center;
-    flex: 1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    z-index: 1000;
 }
 
 .header-titulo {
@@ -247,53 +193,57 @@ a:hover {
 .header-menu {
     position: absolute;
     right: 25px;
-    top: 50%;
-    transform: translateY(-50%);
 }
 
 .menu-desplegable {
     position: relative;
     display: inline-block;
-    z-index: 10000;
 }
 
 .menu-boton {
     background: #7a0e1a;
     color: #fffaf2;
-    padding: 10px 14px;
+    padding: 8px 16px;
+    border-radius: 8px;
     border: none;
-    border-radius: 10px;
     cursor: pointer;
-    font-size: 15px;
-}
-
-.menu-boton:hover {
-    background: #5a0f1b;
 }
 
 .menu-opciones {
     display: none;
     position: absolute;
     right: 0;
-    margin-top: 8px;
+    top: 100%;
+    margin-top: 10px;
     background: #fffaf2;
     border: 1px solid #e6d9c6;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    min-width: 160px;
-    z-index: 9999;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 180px;
+    padding-top: 10px
+}
+
+.menu-opciones::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    /* Cubre el espacio entre el botón y el menú */
+    left: 0;
+    right: 0;
+    height: 20px;
+    display: block;
 }
 
 .menu-opciones a {
     display: block;
     padding: 12px 16px;
     color: #4a3f35;
-    text-decoration: none;
-    font-size: 15px;
+    font-weight: normal;
 }
 
 .menu-opciones a:hover {
     background: #f7f1e3;
+    text-decoration: none;
 }
 
 .menu-desplegable:hover .menu-opciones {

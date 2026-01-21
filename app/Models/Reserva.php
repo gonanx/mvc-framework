@@ -39,10 +39,17 @@ class Reserva extends Model
 
     public function reservasPorUsuario($usuario_id)
     {
-        $sql = "SELECT r.id, r.fecha, r.personas, r.mesa_id, 
-                   h.hora_inicio, h.hora_fin
-            FROM reservas r
+        $sql = "SELECT 
+                r.id, 
+                r.fecha, 
+                r.cantidad_personas, 
+                m.nombre AS nombre_mesa, 
+                h.hora_inicio, 
+                h.hora_fin,
+                r.estado
+            FROM reservas_mesas r
             INNER JOIN horarios h ON r.horario_id = h.id
+            INNER JOIN mesas m ON r.mesa_id = m.id
             WHERE r.usuario_id = ?
             ORDER BY r.fecha ASC, h.hora_inicio ASC";
 
@@ -50,6 +57,5 @@ class Reserva extends Model
         $stmt->execute([$usuario_id]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
-
 
 }

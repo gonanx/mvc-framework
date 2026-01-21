@@ -1,89 +1,67 @@
-/* ============================
-   CABECERA
-============================ */
-
-.header {
-    width: 100%;
-    background: #fffaf2;
-    border-bottom: 1px solid #e6d9c6;
-    padding: 15px 25px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+/* 1. EL TÍTULO / LOGO */
+.header .header-centro .header-titulo {
+    margin: 0 !important;
+    padding: 0 !important;
+    line-height: 1.2;
 }
 
-.header-centro {
-    text-align: center;
-    flex: 1;
+.header .header-centro .header-titulo a.logo-enlace {
+    font-family: 'Cinzel', serif !important;
+    font-size: 28px !important;
+    color: #5a0f1b !important; /* Tu color vino tinto */
+    text-decoration: none !important;
+    text-transform: uppercase !important;
+    letter-spacing: 2px !important;
+    font-weight: 900 !important;
+    display: inline-block;
 }
 
-.header-titulo {
-    margin: 0;
-    font-size: 22px;
-    color: #5a0f1b;
-    font-weight: 600;
-}
-
-/* Menú desplegable */
-.header-menu {
-    position: absolute;
-    right: 25px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-
+/* 2. EL MENÚ DESPLEGABLE (Solución al cierre rápido) */
 .menu-desplegable {
     position: relative;
     display: inline-block;
 }
 
-.menu-boton {
-    background: #7a0e1a;
-    color: #fffaf2;
-    padding: 10px 14px;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 15px;
-}
-
-.menu-boton:hover {
-    background: #5a0f1b;
-}
-
-/* Contenedor de opciones */
 .menu-opciones {
     display: none;
     position: absolute;
     right: 0;
-    margin-top: 8px;
+    top: 100%; /* Aparece justo debajo del botón */
     background: #fffaf2;
     border: 1px solid #e6d9c6;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    min-width: 160px;
-    z-index: 20;
+    min-width: 170px;
+    z-index: 10000;
+    margin-top: 5px; /* Separación visual */
 }
 
-/* Cada opción del menú */
+/* EL PUENTE: Este es el truco para que no se cierre */
+.menu-opciones::before {
+    content: "";
+    position: absolute;
+    top: -15px; /* Cubre el hueco de 5px de margin + el borde */
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: transparent;
+}
+
+.menu-desplegable:hover .menu-opciones {
+    display: block;
+}
+
 .menu-opciones a {
     display: block;
     padding: 12px 16px;
     color: #4a3f35;
     text-decoration: none;
-    font-size: 15px;
+    font-size: 14px;
+    font-family: sans-serif;
+    transition: background 0.2s;
 }
 
 .menu-opciones a:hover {
     background: #f7f1e3;
-}
-
-/* Mostrar menú al pasar el ratón */
-.menu-desplegable:hover .menu-opciones {
-    display: block;
+    color: #7a0e1a;
 }
