@@ -1,49 +1,31 @@
 <?php
-namespace Core;
 
 class Router
 {
-    public function dispatch(): void
+
+    public function ejecutar()
     {
-        // -------------------------------------------------
-        // 1. Obtener la URL
-        // -------------------------------------------------
-        $url = $_GET['url'] ?? '';
+        $url = isset($_GET['url']) ? $_GET['url'] : '';
         $url = trim($url, '/');
+        $partes = explode('/', $url);
 
-        $segments = explode('/', $url);
+        $controlador = !empty($partes[0]) ? ucfirst($partes[0]) . "Controller" : "UsuarioController";
+        $accion = $partes[1] ?? "login";
+        $parametros = array_slice($partes, 2);
 
-        // -------------------------------------------------
-        // 2. Definir controlador, método y parámetros
-        // -------------------------------------------------
-        $controllerName = !empty($segments[0])
-            ? ucfirst($segments[0]) . 'Controller'
-            : 'HomeController';
+        $archivo = "../app/controllers/$controlador.php";
 
-        $method = $segments[1] ?? 'index';
+        if (file_exists($archivo)) {
+            require_once $archivo;
+            $obj = new $controlador();
 
-        $params = array_slice($segments, 2);
-
-        // -------------------------------------------------
-        // 3. Ruta al controlador
-        // -------------------------------------------------
-        $controllerClass = 'App\\Controllers\\' . $controllerName;
-
-
-
-        if (!class_exists($controllerClass)) {
-            die("❌ Clase $controllerClass no existe");
+            if (method_exists($obj, $accion)) {
+                call_user_func_array([$obj, $accion], $parametros);
+            } else {
+                echo "Acción no encontrada";
+            }
+        } else {
+            echo "Controlador no encontrado";
         }
-
-        $controller = new $controllerClass();
-
-        if (!method_exists($controller, $method)) {
-            die("❌ Método $method no existe en $controllerName");
-        }
-
-        // -------------------------------------------------
-        // 4. Ejecutar controlador y método
-        // -------------------------------------------------
-        call_user_func_array([$controller, $method], $params);
     }
 }
